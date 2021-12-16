@@ -1,13 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
-from django.conf import settings
-
 
 
 from .forms import PostForm
 from .models import Group, Post, User
-
 
 
 def index(request):
@@ -40,6 +37,7 @@ def group_posts(request, slug):
     }
     return render(request, 'posts/group_list.html', context)
 
+
 def profile(request, username):
     author = get_object_or_404(User, username=username)
     posts = author.posts.all()
@@ -57,11 +55,10 @@ def profile(request, username):
 
 
 def post_detail(request, post_id):
-    post = get_object_or_404(Post, pk=post_id) 
+    post = get_object_or_404(Post, pk=post_id)
     context = {'post': post,
-    }
+               }
     return render(request, 'posts/post_detail.html', context)
-
 
 
 @login_required
