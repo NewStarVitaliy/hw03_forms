@@ -29,7 +29,7 @@ def index(request):
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
-    title = f'Записи сообщества'
+    title = 'Записи сообщества'
     posts = group.posts.all()
     page_obj = utils(request, posts)
     context = {
