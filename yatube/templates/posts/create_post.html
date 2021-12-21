@@ -27,7 +27,6 @@
                 {% endif %}
                 {% csrf_token %}
                 {% for field in form %}
-                <input type="hidden" name="csrfmiddlewaretoken" value="">
                 <div class="form-group row my-3 p-3">
                   <label for="{{ field.id_for_label }}">
                     {{ form.text.label }}
@@ -35,11 +34,12 @@
                     <span class="required text-danger">*</span>
                     {% endif %}
                   </label>
-                  <textarea name="text" cols="40" rows="10" class="form-control" required id="id_text">
-                    </textarea>
-                  <small id="id_text-help" class="form-text text-muted">
-                    {{ form.text.help_text}}
+                  {{ field|addclass:"form-control" }}
+                  {% if field.help_text %}
+                  <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+                    {{ field.help_text|safe }}
                   </small>
+                  {% endif %}
                 </div>
                 {% endfor %}
                 <div class="form-group row my-3 p-3">
