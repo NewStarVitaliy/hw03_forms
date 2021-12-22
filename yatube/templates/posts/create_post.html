@@ -26,35 +26,29 @@
               <form method="post" action="{% url 'posts:post_create' %}">
                 {% endif %}
                 {% csrf_token %}
-                {% for field in form %}
                 <div class="form-group row my-3 p-3">
-                  <label for="{{ field.id_for_label }}">
-                    {{ form.text.label }}
-                    {% if field.field.required %}
-                    <span class="required text-danger">*</span>
-                    {% endif %}
+                  <label for="{{ form.text.id_for_label }}">
+                        {{ form.text.label }}
+                        <span class="required text-danger">*</span>
                   </label>
-                  {{ field|addclass:"form-control" }}
-                  {% if field.help_text %}
-                  <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
-                    {{ field.help_text|safe }}
-                  </small>
-                  {% endif %}
+                  {{ form.text }}
+                  {% if form.text.help_text %}
+                    <small 
+                      id="{{ form.text.id_for_label }}-help"
+                      class="form-text text-muted">
+                      {{ form.text.help_text|safe }}
+                    </small>
+                  {% endif %}			                 
                 </div>
-                {% endfor %}
-                <div class="form-group row my-3 p-3">
-                  <label for="id_group">
-                    {{ form.group.label }}
+                <div class="form-group row my-3 p-3">                  
+                  <label for="{{ form.group.id_for_label }}">
+                    {{ form.group.label }}                 
                   </label>
                   <select name="group" class="form-control" id="id_group">
-                    <option value="" selected>---------</option>
-                    {% for group in groups %}
-                    <option value="1">{{ group.id }} {{ group.title }}</option>
-                    {% endfor %}
+                   {% for group in form.group %}
+                       {{ group }}
+                   {% endfor %}
                   </select>
-                  <small id="id_group-help" class="form-text text-muted">
-                    {{ form.group.help_text }}
-                  </small>
                 </div>
                 <div class="d-flex justify-content-end">
                   <button type="submit" class="btn btn-primary">
