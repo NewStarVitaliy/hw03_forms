@@ -44,8 +44,8 @@
                   <label for="{{ form.group.id_for_label }}">
                     {{ form.group.label }}                 
                   </label>
-                  <select name="group" class="form-control" id="id_group">
-                   {% for group in form.group %}
+                  <select name="form.group.label" class="form-control" id="form.group.id_for_label">                  
+                    {% for group in form.group %}
                        {{ group }}
                    {% endfor %}
                   </select>
